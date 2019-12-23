@@ -66,7 +66,6 @@ void killall (const char *name, int sig) {
     while ((current = fgetc(status)) != EOF && current != '\n') strncat(buffer, &current, 1);
     if (strstr(buffer, name) != NULL) kill(atoi(entry->d_name), sig);
 
-    puts(buffer);
     fclose(status);
   }
 
@@ -84,7 +83,7 @@ void killall (const char *name, int sig) {
     if (pEntry.th32ProcessID == __getpid()) continue;
 
     HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, 0, (DWORD)pEntry.th32ProcessID);
-    if (hProcess == NULL)  continue;
+    if (hProcess == NULL) continue;
     
     TerminateProcess(hProcess, sig);
     CloseHandle(hProcess);
